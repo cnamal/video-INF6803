@@ -17,7 +17,6 @@ TrackingMethod::TrackingMethod(VideoAbstract& video,AbstractFrameTransformation&
     Mat ROI = transformedFrame(modelArea);
     range= {trans.getRange()};
     histSize = trans.getHistSize();
-    //calcHist(&ROI,1,trans.getChannels(),Mat(),histRef,1,&histSize,&range);
     getHistROI(histRef,&ROI);
     namedWindow(windowName);
 }
@@ -25,7 +24,6 @@ TrackingMethod::TrackingMethod(VideoAbstract& video,AbstractFrameTransformation&
 void TrackingMethod::getHistROI(cv::Mat& hist,Mat* ROI)
 {
     calcHist(ROI,1,trans.getChannels(),Mat(),hist,1,&histSize,&range);
- //   normalize(hist, hist, 0, 1, NORM_MINMAX, -1, Mat());
 }
 
 void TrackingMethod::track()

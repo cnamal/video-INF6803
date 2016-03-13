@@ -53,14 +53,6 @@ void MeanShift::process() {
 }
 
 MeanShift::MeanShift(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,bool show) : TrackingMethod(video, trans, windowName) {
-    /*frame = video.getFrame();
-    modelArea = video.getModelArea();
-    transformedFrame = trans.getTransformedFrame(frame);
-    Mat ROI = transformedFrame(modelArea);
-    const float* range= {trans.getRange()};
-    int histSize = trans.getHistSize();
-    calcHist(&ROI,1,trans.getChannels(),Mat(),histRef,1,&histSize,&range);
-    minMaxLoc(histRef, 0, &max);*/
     if(show){
         rectangle(frame, modelArea, Scalar(0, 0, 255));
         imshow(windowName, frame);

@@ -10,28 +10,10 @@ using namespace std;
 
 ParticleFilter::ParticleFilter(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,bool show) : TrackingMethod(video,
                                                                                                           trans,windowName) {
-    //cerr<< "beg"<< endl;
+
     srand(time(NULL));
-    /*frame = video.getFrame();
-    modelArea = video.getModelArea();
-    transformedFrame = trans.getTransformedFrame(frame);
-    comparator([](const std::pair<double, cv::Rect>& firstElem, const std::pair<double, cv::Rect>& secondElem){ return true;});
-    Mat ROI = transformedFrame(modelArea);
-    const float* range= {trans.getRange()};
-    int histSize = trans.getHistSize();
-    calcHist(&ROI,1,trans.getChannels(),Mat(),histRef,1,&histSize,&range);*/
-    /*for(int i=0;i<nbParticles;i++){
-        ROI = transformedFrame(listR[i]);
-        Mat hist;
-        calcHist(&ROI,1,trans.getChannels(),Mat(),hist,1,&histSize,&range);
-        listPair.push_back(make_pair(histComp(histRef, hist),listR[i]));
-    }
-    sort(listPair.begin(),listPair.end(),comparator);*/
-    //cerr << modelArea<< " " << nbParticles<< endl;
-    //cout << histRef<< endl;
     listR = particle(modelArea, nbParticles);
     computeParticles();
-    //cerr << "end"<< endl;
     if(show){
         rectangle(frame,listPair[0].second,Scalar(0, 0, 255));
         imshow(windowName, frame);
@@ -88,9 +70,6 @@ vector<Rect> ParticleFilter::particle(Rect primary, int nb) {
         p.width = tempC;
         p.height = tempC;
         list.push_back(p);
-        /*cout << "Center (" << tempX << ", " << tempY << ")" << endl;
-        cout << "Top-Left (" << p.x << ", " << p.y << ")" << endl;
-        cout << "Width-Height (" << p.width << ", " << p.height << ")" << endl;*/
     }
 
     return list;
@@ -100,7 +79,6 @@ void ParticleFilter::computeParticles() {
     for (int i = 0; i < nbParticles; i++) {
         Mat ROI = transformedFrame(listR[i]);
         Mat hist;
-        /*calcHist(&ROI,1,trans.getChannels(),Mat(),hist,1,&histSize,&range);*/
         getHistROI(hist, &ROI);
         listPair.push_back(make_pair(histComp(histRef, hist), listR[i]));
     }
