@@ -1,5 +1,5 @@
 CC=g++
-EXE=p1 p2 p3 main
+EXE=main
 CPPFLAGS=-std=c++11 `pkg-config --cflags opencv`
 LDLIBS=`pkg-config --libs opencv`
 

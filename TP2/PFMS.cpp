@@ -6,7 +6,7 @@
 #include <opencv2/highgui/highgui.hpp>
 #include "stdlib.h"
 
-PFMS::PFMS(VideoAbstract &video, AbstractFrameTransformation &trans,std::string windowName) : MeanShift(video,trans,windowName,false),ParticleFilter(video,trans,windowName,false),TrackingMethod(video,trans,windowName)
+PFMS::PFMS(VideoAbstract &video, AbstractFrameTransformation &trans,std::string windowName) : TrackingMethod(video,trans,windowName),MeanShift(video,trans,windowName,false),ParticleFilter(video,trans,windowName,false)
 {
     MeanShift::process();
     cv::waitKey(0);

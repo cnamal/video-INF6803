@@ -11,7 +11,7 @@ using namespace std;
 ParticleFilter::ParticleFilter(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,bool show) : TrackingMethod(video,
                                                                                                           trans,windowName) {
     //cerr<< "beg"<< endl;
-    srand(200);
+    srand(time(NULL));
     /*frame = video.getFrame();
     modelArea = video.getModelArea();
     transformedFrame = trans.getTransformedFrame(frame);
