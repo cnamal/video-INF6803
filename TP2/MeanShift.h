@@ -11,7 +11,7 @@
 class MeanShift : virtual public TrackingMethod {
 
 public:
-    MeanShift(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName,bool show = true);
+    MeanShift(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName="Video",int waitDelay = 33,bool show = true);
 
 protected:
     void process();

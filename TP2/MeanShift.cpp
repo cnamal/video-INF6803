@@ -13,9 +13,9 @@ void MeanShift::replace(Mat frame, Mat hist) {
     for (int i = 0; i < frame.rows; i++) {
         for (int j = 0; j < frame.cols; j++) {
             uchar value = frame.at<uchar>(i, j);
-            int proba = cvRound(hist.at<float>(value));
-            if (proba > 255)
-                proba = 255;
+            int proba = cvRound(hist.at<float>(value)*(trans.getHistSize()-1)/max);
+            if(proba>(trans.getHistSize()-1))
+                proba=(trans.getHistSize()-1);
             frame.at<uchar>(i, j) = proba;
         }
     }
@@ -52,11 +52,10 @@ void MeanShift::process() {
     } while (prev.x != centerPoint.x || prev.y != centerPoint.y);
 }
 
-MeanShift::MeanShift(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,bool show) : TrackingMethod(video, trans, windowName) {
+MeanShift::MeanShift(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,int waitDelay,bool show) : TrackingMethod(video, trans, windowName,waitDelay) {
     if(show){
         rectangle(frame, modelArea, Scalar(0, 0, 255));
         imshow(windowName, frame);
-        waitKey(0);
-    } else
-        std::cerr << "didn't show" << std::endl;
+        waitKey(waitDelay);
+    }
 }

@@ -8,8 +8,8 @@
 using namespace cv;
 using namespace std;
 
-ParticleFilter::ParticleFilter(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,bool show) : TrackingMethod(video,
-                                                                                                          trans,windowName) {
+ParticleFilter::ParticleFilter(VideoAbstract &video, AbstractFrameTransformation &trans,string windowName,int waitDelay,bool show) : TrackingMethod(video,
+                                                                                                          trans,windowName,waitDelay) {
 
     srand(time(NULL));
     listR = particle(modelArea, nbParticles);
@@ -17,9 +17,8 @@ ParticleFilter::ParticleFilter(VideoAbstract &video, AbstractFrameTransformation
     if(show){
         rectangle(frame,listPair[0].second,Scalar(0, 0, 255));
         imshow(windowName, frame);
-        waitKey(0);
-    } else
-        cerr << "didn't show " << endl;
+        waitKey(waitDelay);
+    }
 }
 
 double ParticleFilter::histComp(Mat h1, Mat h2) {
@@ -28,7 +27,6 @@ double ParticleFilter::histComp(Mat h1, Mat h2) {
 }
 
 void ParticleFilter::process() {
-    cerr << "particle process "<< endl;
     listR.clear();
     for (int i = 0; i < 10; i++) {
         vector<Rect> tmp = particle(listPair[i].second, 100);

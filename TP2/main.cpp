@@ -13,10 +13,10 @@
 
 #define VIDEO 0
 #define HSV 1
-#define PART 2
+#define PART 3
 
 int main() {
-    std::string windowName("Video");
+
 
 #if VIDEO
     FollowVisibleFace video;
@@ -32,17 +32,17 @@ int main() {
 
     switch (PART) {
         case 1: {
-            ParticleFilter filter(video, trans, windowName);
+            ParticleFilter filter(video, trans);
             filter.track();
         }
             break;
         case 2: {
-            MeanShift meanShift(video, trans, windowName);
+            MeanShift meanShift(video, trans);
             meanShift.track();
         }
             break;
         default: {
-            PFMS pfms(video, trans, windowName);
+            PFMS pfms(video, trans);
             pfms.track();
         }
     }

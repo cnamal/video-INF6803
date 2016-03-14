@@ -15,7 +15,7 @@
 class ParticleFilter : virtual public TrackingMethod{
 
 public:
-    ParticleFilter(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName,bool show =true);
+    ParticleFilter(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName="Video",int waitDelay = 33,bool show =true);
 
 protected:
     void process();

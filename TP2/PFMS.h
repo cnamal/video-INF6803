@@ -14,7 +14,7 @@
 class PFMS : public MeanShift,public ParticleFilter{
 
 public:
-    PFMS(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName);
+    PFMS(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName="video",int waitDelay=33);
 
 protected:
     virtual void process();

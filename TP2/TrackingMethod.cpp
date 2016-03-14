@@ -8,7 +8,7 @@
 
 using namespace cv;
 
-TrackingMethod::TrackingMethod(VideoAbstract& video,AbstractFrameTransformation& trans,string windowName): video(video),trans(trans),windowName(windowName)
+TrackingMethod::TrackingMethod(VideoAbstract& video,AbstractFrameTransformation& trans,string windowName,int waitDelay): video(video),trans(trans),windowName(windowName),waitDelay(waitDelay)
 {
     frame = video.getFrame();
     fSize = frame.size();
@@ -18,6 +18,7 @@ TrackingMethod::TrackingMethod(VideoAbstract& video,AbstractFrameTransformation&
     range= {trans.getRange()};
     histSize = trans.getHistSize();
     getHistROI(histRef,&ROI);
+    minMaxLoc(histRef, 0, &max, 0, 0);
     namedWindow(windowName);
 }
 
@@ -34,6 +35,6 @@ void TrackingMethod::track()
         process();
         rectangle(frame,modelArea,Scalar(0,0,255));
         imshow(windowName,frame);
-        waitKey(0);
+        waitKey(waitDelay);
     }
 }

@@ -12,7 +12,7 @@
 class TrackingMethod {
 
 public:
-    TrackingMethod(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName);
+    TrackingMethod(VideoAbstract& video,AbstractFrameTransformation& trans,std::string windowName = "Video",int waitDelay = 33);
     void track();
     
 protected:
@@ -27,7 +27,9 @@ protected:
     cv::Size fSize;
     const float* range;
     int histSize;
+    double max;
     std::string windowName;
+    int waitDelay;
 };
 
 
