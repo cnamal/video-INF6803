@@ -1,0 +1,5 @@
+We used the AT&T database, downloadable at : http://www.cl.cam.ac.uk/Research/DTG/attarchive/pub/data/att_faces.zip . (should be in at/ folder so that image paths are like in at.txt)
+
+We then used https://github.com/j2kun/eigenfaces/blob/master/faces94.tar.gz?raw=true as a second database (download in faces94 folder). However, only 37 of those images were used and they had to be converted to 92*118 images. A bash script is given. (./resize.sh faces94 jpg 92 112)
+
+To recreate our tests you can launch the results.sh script.
